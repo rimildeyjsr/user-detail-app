@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,25 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Collapse from '@material-ui/core/Collapse';
 import "./index.css";
-
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
 
 const useStyles = makeStyles({
   table: {
@@ -35,8 +18,29 @@ const useStyles = makeStyles({
   },
 });
 
+const useRowStyles = makeStyles({
+  root: {
+    '& > *': {
+      borderBottom: 'unset',
+    },
+  },
+});
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: '#1565c0',
+    color: theme.palette.common.white,
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
 export function UserTable() {
   const [data, setData] = useState([]);
+  const [open, setOpen] = useState(-1);
 
   useEffect(() => {
     async function fetchData() {
@@ -59,6 +63,7 @@ export function UserTable() {
   }
 
   const classes = useStyles();
+  const rowClasses = useRowStyles();
 
   return(
     <TableContainer component={Paper}>
@@ -103,65 +108,81 @@ export function UserTable() {
         <TableBody>
           {
             data.map((row) => (
-              <StyledTableRow key={row.id}>
-                <StyledTableCell component="th" scope="row">
-                  {row.name}
-                </StyledTableCell>
+              <React.Fragment key={row.id}>
+                <TableRow className={rowClasses.root}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
 
-                <StyledTableCell>
-                  {row.username}
-                </StyledTableCell>
+                  <TableCell>
+                    {row.username}
+                  </TableCell>
 
-                <StyledTableCell>
-                  {row.email}
-                </StyledTableCell>
+                  <TableCell>
+                    {row.email}
+                  </TableCell>
 
-                <StyledTableCell>
-                  {row.fullAddress}
-                </StyledTableCell>
+                  <TableCell>
+                    {row.fullAddress}
+                  </TableCell>
 
-                <StyledTableCell>
-                  {row.phone}
-                </StyledTableCell>
+                  <TableCell>
+                    {row.phone}
+                  </TableCell>
 
-                <StyledTableCell>
-                  {row.website}
-                </StyledTableCell>
+                  <TableCell>
+                    {row.website}
+                  </TableCell>
 
-                <StyledTableCell>
-                  {row.company.name}
-                </StyledTableCell>
+                  <TableCell>
+                    {row.company.name}
+                  </TableCell>
 
-                <StyledTableCell>
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    style={
-                      {
-                        'borderColor': '#1b5e20',
-                        'color': '#1b5e20',
-                        'margin': '10px'
+                  <TableCell>
+                    <Button
+                      onClick={() => setOpen(open === row.id ? -1 : row.id)}
+                      variant="outlined"
+                      size="small"
+                      style={
+                        {
+                          'borderColor': '#1b5e20',
+                          'color': '#1b5e20',
+                          'margin': '10px'
+                        }
                       }
-                    }
-                  >
-                    Open
-                  </Button>
-                  <Button
-                    onClick={() => deleteRow(row.id)}
-                    variant="outlined"
-                    size="small"
-                    style={
-                      {
-                        'borderColor': '#c63533',
-                        'color': '#c63533',
-                        'margin': '10px'
+                    >
+                      Open
+                    </Button>
+                    <Button
+                      onClick={() => deleteRow(row.id)}
+                      variant="outlined"
+                      size="small"
+                      style={
+                        {
+                          'borderColor': '#c63533',
+                          'color': '#c63533',
+                          'margin': '10px'
+                        }
                       }
-                    }
-                  >
-                    Delete
-                  </Button>
-                </StyledTableCell>
-              </StyledTableRow>
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell style={{ paddingBottom: 0, paddingTop: 0}} colSpan={8}>
+                    <Collapse
+                      in={open === row.id}
+                      timeout="auto"
+                      unmountOnExit
+                    >
+                      <p>
+                        Userinfo
+                      </p>
+                    </Collapse>
+                  </TableCell>
+                </TableRow>
+              </React.Fragment>
             )
           )}
         </TableBody>

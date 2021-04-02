@@ -30,11 +30,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/user-table/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="538">
-              <caret line="54" column="20" lean-forward="true" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="20" />
+            <state relative-caret-position="384">
+              <caret line="25" column="4" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
-                <element signature="e#1782#2225#0" />
+                <element signature="e#197#326#0" />
+                <element signature="e#1512#1522#0" />
               </folding>
             </state>
           </provider>
@@ -137,12 +138,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617339794649</updated>
-      <workItem from="1617339795889" duration="5076000" />
+      <workItem from="1617339795889" duration="7125000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5076000" />
+    <option name="totallyTimeSpent" value="7125000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -252,11 +253,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/user-table/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="54" column="20" lean-forward="true" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="20" />
+        <state relative-caret-position="384">
+          <caret line="25" column="4" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
-            <element signature="e#1782#2225#0" />
+            <element signature="e#197#326#0" />
+            <element signature="e#1512#1522#0" />
           </folding>
         </state>
       </provider>
