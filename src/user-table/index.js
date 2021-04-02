@@ -10,6 +10,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
+import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import "./index.css";
 
 const useStyles = makeStyles({
@@ -62,6 +64,20 @@ export function UserTable() {
     setData(newData);
   }
 
+  function sortArrayObjAscendingByField(field) {
+    let newData = data.slice().sort((a,b) => {
+      return (a[field] > b[field]) ? 1 : ((b[field] > a[field]) ? -1 : 0);
+    });
+    setData(newData);
+  }
+
+  function sortArrayObjDescendingByField(field) {
+    let newData = data.slice().sort((a,b) => {
+      return (a[field] < b[field]) ? 1 : ((b[field] < a[field]) ? -1 : 0);
+    });
+    setData(newData);
+  }
+
   const classes = useStyles();
   const rowClasses = useRowStyles();
 
@@ -72,7 +88,19 @@ export function UserTable() {
         <TableHead>
           <TableRow>
             <StyledTableCell>
-              Name
+              <div className="name-sort-img-container">
+                Name
+                <div className="img-container">
+                  <KeyboardArrowUp
+                    className="arrow-img"
+                    onClick={() => sortArrayObjAscendingByField('name')}
+                  />
+                  <KeyboardArrowDown
+                    className="arrow-img"
+                    onClick={() => sortArrayObjDescendingByField('name')}
+                  />
+                </div>
+              </div>
             </StyledTableCell>
 
             <StyledTableCell>
@@ -80,7 +108,19 @@ export function UserTable() {
             </StyledTableCell>
 
             <StyledTableCell>
-              Email
+              <div className="name-sort-img-container">
+                Email
+                <div className="img-container">
+                  <KeyboardArrowUp
+                    className="arrow-img"
+                    onClick={() => sortArrayObjAscendingByField('email')}
+                  />
+                  <KeyboardArrowDown
+                    className="arrow-img"
+                    onClick={() => sortArrayObjDescendingByField('email')}
+                  />
+                </div>
+              </div>
             </StyledTableCell>
 
             <StyledTableCell>
@@ -176,8 +216,26 @@ export function UserTable() {
                       timeout="auto"
                       unmountOnExit
                     >
+                      <h3>
+                        More Details:
+                      </h3>
+
                       <p>
-                        Userinfo
+                        <span class="bold-text">
+                          Address Map Coordinates:
+                        </span> {row.address.geo.lat}, {row.address.geo.lng}
+                      </p>
+
+                      <p>
+                        <span class="bold-text">
+                          Company Catchphrase
+                        </span> : {row.company.catchPhrase}
+                      </p>
+
+                      <p>
+                        <span class="bold-text">
+                          Company business area
+                        </span> : {row.company.bs}
                       </p>
                     </Collapse>
                   </TableCell>
